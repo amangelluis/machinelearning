@@ -34,3 +34,10 @@ for variable in dataset_reduccion_filas.columns:
     
 MACHINE LEARNING
 1- Probar con partes pequeñas del Dataset, porque si lo hacemos con grandes y hay un error habremos perdido mucho tiempo y memoria por él.
+
+GIT
+1- Hay un control de versiones ya en la herramienta project idx (tmb en VScode)
+
+2- Aún así, se puede ser el comando "git" en la terminal desde el directorio raiz del repositorio
+
+3- No añadir el entorno virtual ni del .idx
