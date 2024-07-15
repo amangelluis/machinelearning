@@ -1,0 +1,4 @@
+-Para machine learning no es interesante que las variables tengan un alto índice de correlación.
+Esto se debe a que para entrenar tu modelo, necesitas la mayor cantidad de información posible, si
+la correlación es muy alta entre dos variables, esas dos están expresando prácticamente la misma información,
+por lo que sería redundante.

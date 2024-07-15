@@ -1,0 +1,36 @@
+ANALISIS:
+1- Para comprobar los nulos tendría que crearme un nuevo dataset con tantas filas como días entre el 1 de 1994 hasta el 9 de febrero de 2021. Esto
+es así porque es una serie temporal, y puede haber un nulo que no hayamos detectado porque directamente la fila entera sea nula y no se haya añadido
+al dataset, pero sabemos que debería estar ahí, pues al ser medidas que se toman diariamente, si falta un día, falta una muestra. Por ejemplo, si no
+tenemos medidas del 3 de mayo de 1996, no se añadirá una fila para este día, al no existir esta fila, de la manera en la que comprobábamos los nulos
+nunca nos daríamos cuénta, pero ahora, como hay una fila por día, ese día lo llenariamos de nulos y así lo detectariamos.
+
+2- A la hora de hace histogramas de la misma magnitud (Humedad por ejemplo), sería interesante hacerlo en la misma escala o incluso en una misma
+gráfica, para tener una mejor representación visual.
+
+3- Los scatter para graficar cosas que ya sabemos del mapa de calor no sirven pa na.
+
+MANIPULACION:
+1- Los valores incorrectos de ETO_PM_FAO (2,928) y DVMED (radianes) se pueden corregir porque disponemos de fórmulas para transformarlos.
+
+2- Los valores faltantes de DEWPT, DPV, HSOL, RADMAX, RADMED, VVMAX y VVMED no podemos inducirlos, porque faltan tramos demasiado largos como
+para deducir que valor podrían tener.
+
+3- El resto de valores faltantes si que podrían llegar a sacarse, ya que están más aislados, así que podemos deducirlos en base a los valores de los
+días de alrededor, aunque no sé bien como.
+
+4-¿Qué hacer con una fila que tenga valores nulos insalvables (DPV, DEWPT, HSOL...) pero también tenga valores útiles?
+
+5- Hacer notebook aparte para imputación.
+ 
+6-Codigo a probar:
+for variable in dataset_reduccion_filas.columns:
+    if variable != 'FECHA_2' and variable != 'FECHA' and variable != 'CODEST' and variable != 'AÑO' and variable != 'ESTACION':
+        imputer = KNNImputer(n_neighbors=500, weights='distance')
+        after_imputation = imputer.fit_transform(pd.DataFrame(dataset_reduccion_filas[variable]))
+        after_imputation = pd.DataFrame(after_imputation)
+        print(after_imputation.head(2))
+        #dataset_reduccion_filas[variable] = after_imputation[0].values
+    
+MACHINE LEARNING
+1- Probar con partes pequeñas del Dataset, porque si lo hacemos con grandes y hay un error habremos perdido mucho tiempo y memoria por él.
